@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Klinik Kecantikan-UAS</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin=""></script>
+  <script src="/js/leaflet.ajax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <style type="text/css">
+    #map {
+			position: fixed;
+			width: 100%;
+			height: 90%;
+		}
+
+    header {
+			background-color: #FAA0A0;
+			padding: 2px;
+			text-align: left;
+			font-size: 16px;
+			color: white;
+			font-family: Arial, Helvetica, sans-serif;
+		    }
+	p {
+			font-size: 10px;
+	  }
+	text {
+			font-size: 15px;
+			font-weight: bold;
+		 }
+    </style>
+</head>
+
+<header>
+	<h2 style="padding-left: 40px;">Klinik Kecantikan</h2>
+    <h4 style="padding-left: 40px;">Sebuah Webpage yang menampilkan lokasi Klinik Kecantikan di Pontianak</h4>
+</header>
+
+<body>
+<div id="map"></div>
+<script>
+	const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+	const mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    });
+
+    var streets = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+
+    var map = L.map('map', {
+        center: [-0.022606079023258008, 109.34425344093134],
+        zoom: 13,
+        layers: [streets]
+    });
+
+<!--Icon-->
+
+    var iconmarker = L.icon({
+        iconUrl: '/img/clinic.png/',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+    });
+
+    var iconhome = L.icon({
+        iconUrl: '/img/home.png/',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16]
+    });
+
+<!--GeoJSON Marker Rumah - MARKER-->
+
+    var geojsonmarker = new L.GeoJSON.AJAX("/geojson/Rumah.geojson",{
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {icon: iconhome});
+        },
+        onEachFeature: function(feature,layer){
+        layer.bindPopup('<b>Ini adalah </b>' + feature.properties.name);
+        }
+
+    }).addTo(map);
+
+
+<!--GeoJSON Marker Klinik Kecantikan - MARKER-->
+
+    var geojsonmarker = new L.GeoJSON.AJAX("/geojson/KlinikKecantikan.geojson",{
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {icon: iconmarker});
+        },
+        onEachFeature: function(feature,layer){
+        layer.bindPopup(feature.properties.name +'<br>'+ feature.properties.address );
+        }
+
+    }).addTo(map);
+
+<!--GeoJSON Rute Klinik Kecantikan - POLYLINE-->
+
+    var geojsonline = new L.GeoJSON.AJAX("/geojson/RuteKlinikKecantikan.geojson",{
+        onEachFeature: function(feature,layer){
+        layer.bindPopup('<b>Jalan ini menuju </b>' +feature.properties.name)
+        },
+        style:{
+        color : 'grey',
+        weight : 2
+    }
+    }).addTo(map);
+
+
+<!--GeoJSON Batas Area Wilayah - POLYGON-->
+
+    var geojsonwilayah = new L.GeoJSON.AJAX("/geojson/BatasWilayah.geojson",{
+         onEachFeature: function(feature,layer){
+        layer.bindPopup('<b>Batas Area Wilayah </b>' + feature.properties.wilayah)
+    },
+    style:{
+        color : '#F89880',
+        fillColor: 'red',
+        fillOpacity:0.1,
+    }
+    }).addTo(map);
+
+
+<!--layer control-->
+
+    var baseLayers = {
+        "Mapbox": streets,
+        "OpenStreetMap": osm
+    };
+
+    var overlays = {
+        "Klinik Kecantikan": geojsonmarker,
+        "Rute Klinik Kecantikan": geojsonline,
+        "Batas Area Wilayah": geojsonwilayah
+    };
+
+    var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+</script>
+</body>
+</html>

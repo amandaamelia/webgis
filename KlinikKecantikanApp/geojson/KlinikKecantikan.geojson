@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "KlinikKecantikan",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Erha Clinic Pontianak</text>", "address": "<p>Jl. Slt. Abdurrahman No.42, Darat Sekip, Kec. Pontianak Kota</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.331382610101429, -0.036920334469492 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Natasha Skin Clinic Center</text>", "address": "<p>Jl. Slt. Abdurrahman No.85, Darat Sekip, Kec. Pontianak Kota</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.32783652873259, -0.039393785710805 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Inara Aeshtetic Clinic</text>", "address": "<p>Jl. Slt. Abdurrahman No.128, Akcaya, Kec. Pontianak Selatan</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.325765980092854, -0.042003316714196 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Shasha Skin Care</text>", "address": "<p>Jl. Jenderal Ahmad Yani No.6B, Benua Melayu Darat, Kec. Pontianak Selatan</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.335118135997917, -0.037758159385489 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Hevi Beauty Care Pusat</text>", "address": "<p>Jl. HM. Suwignyo No.18A</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.317050197706294, -0.03427144688533 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Klinik Naavagreen Cabang Pontianak</text>", "address": "<p>Jl. Prof. M.Yamin No.15, Akcaya, Kec. Pontianak Selatan</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.318975794600107, -0.048498118470363 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Dians Glow Clinic</text>", "address": "<p>Jl. P. Natakusuma, Sungai Bangkong, Kec. Pontianak Kota</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.31795331112113, -0.036120748648966 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>dSkin Aesthetic</text>", "address": "Ruko Ayani Mega Mall Blok H No.3A, Deretan Jawi Ria Lama, Kec. Pontianak Selatan</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.344344918315144, -0.051321591300687 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Ozthetique Pontianak</text>", "address": "<p>Jl. Jenderal Ahmad Yani No.115, Bansir Darat, Kec. Pontianak Tenggara</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.352210943604149, -0.059071724133239 ] } },
+{ "type": "Feature", "properties": { "id": null, "name": "<text>Bening's Clinic Pontianak</text>", "address": "<p>Jl. Moh Sohor No.48</p>" }, "geometry": { "type": "Point", "coordinates": [ 109.333096496741987, -0.046304922770209 ] } }
+]
+}
